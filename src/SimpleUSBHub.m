@@ -241,7 +241,12 @@ NSString* const ReconnectNotification = @"ReconnectNotification";
 - (void) stop
 {
     [_channel cancel];
+    _channel.delegate = nil; // release strong
     _channel = nil;
+    
+    [_peerChannel cancel];
+    _peerChannel.delegate = nil; // release strong
+    _peerChannel = nil;
 }
 
 - (void) startListening
@@ -254,11 +259,11 @@ NSString* const ReconnectNotification = @"ReconnectNotification";
             NSLog(@"%@", [NSString stringWithFormat:@"Failed to listen on 127.0.0.1:%d: %@", port, error]);
         } else {
             NSLog(@"%@", [NSString stringWithFormat:@"Listening on 127.0.0.1:%d", port]);
-            self.channel = channel;
             
             self.stateCallback(SimpleUSBHubStateServerReady);
         }
     }];
+    self.channel = channel;
 }
 
 - (void) sendFrameOfType:(uint32_t) type withPalload:(dispatch_data_t) payload
