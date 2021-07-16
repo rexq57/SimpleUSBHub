@@ -5,7 +5,7 @@ https://github.com/rsms/peertalk
 使用Pod的话，你需要在Podfile文件里添加以下行：
 
 ``````
-pod 'PeerTalk', :git => 'https://github.com/rsms/peertalk'
+pod 'PeerTalk', :git => 'https://github.com/rsms/peertalk.git', :commit => '588303b43efa5082d654b6f75d1b84a6ba4b5b9e'
 ``````
 
 提供两个类：SimpleUSBHubClient、SimpleUSBHubServer
